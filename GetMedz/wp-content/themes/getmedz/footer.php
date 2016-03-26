@@ -5,15 +5,7 @@
 			<div class="row">
 				<div class="col-md-12 sub_footer">
 					<div class="col-md-5">
-						<ul>
-							<li><a href="javaScript:void(0);">Home</a>|</li>
-							<li><a href="javaScript:void(0);">About us</a>|</li>
-							<li><a href="javaScript:void(0);">Faqs</a>|</li>
-							<li><a href="javaScript:void(0);">How it Work</a>|</li>
-							<li><a href="javaScript:void(0);">Blog</a>|</li>
-							<li><a href="javaScript:void(0);">Contact us</a></li>
-							<div class="clr"></div>
-						</ul>
+						<?php echo wpmb_footermenu()?>
 						<p>Powered by Prochnost’ Technologies Pvt Ltd</p>
 					</div>
 					<div class="col-md-5">

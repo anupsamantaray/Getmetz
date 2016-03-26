@@ -47,62 +47,32 @@ get_header(); ?>
 		<!--body_content-->
 		
 		<div class="body_content">
-			<div class="col-md-6 rightbody">
-				<div class="farmacy">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/body_bg.jpg" class="bodybg" alt=""/>
-					<a href="javaScript:void(0);" class="hover_bodybg">
-						<div class="subhover_bodybg">
-							<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icon_body1.png" class="" alt=""/></center>
-							<h2>Capture Prescription/Medication</h2>
-							<p>Capture a snapshot of prescription or type the name of medicine</p>
-							<input value="More Details" id="btnsubmit" type="submit" class="footer_moredetail">
-							<div class="clr"></div>
-						</div>
-					</a>
+			<?php 
+			$posts_array = array();
+			$posts_array = get_posts(
+				array(
+					'posts_per_page' => 4,
+					'post_type' => 'homeother',
+					'post_status' => 'publish'
+				)
+			);
+			?>
+			<?php foreach($posts_array as $pind => $postdata) : ?>
+				<div class="col-md-6 rightbody">
+					<div class="farmacy">
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/body_bg.jpg" class="bodybg" alt=""/>
+						<a href="javaScript:void(0);" class="hover_bodybg">
+							<div class="subhover_bodybg">
+								<center><img src="<?php echo get_post_meta($postdata->ID, 'posticon', true); ?>" class="" alt=""/></center>
+								<h2><?php echo $postdata->post_title?></h2>
+								<p><?php echo $postdata->post_content?></p>
+								<input value="More Details" id="btnsubmit" type="button" class="footer_moredetail" onclick="location.href='<?php echo get_permalink( $postdata->ID ); ?>'">
+								<div class="clr"></div>
+							</div>
+						</a>
+					</div>
 				</div>
-			</div>
-			<div class="col-md-6 rightbody">
-				<div class="farmacy">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/body_bg.jpg" class="bodybg" alt=""/>
-					<a href="javaScript:void(0);" class="hover_bodybg">
-						<div class="subhover_bodybg">
-							<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icon_body2.png" class="" alt=""/></center>
-							<h2>Get Best Quote</h2>
-							<p>Get best quotation from the seller around your location.</p>
-							<input value="More Details" id="btnsubmit" type="submit" class="footer_moredetail">
-							<div class="clr"></div>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="col-md-6 rightbody">
-				<div class="farmacy">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/body_bg.jpg" class="bodybg" alt=""/>
-					<a href="javaScript:void(0);" class="hover_bodybg">
-						<div class="subhover_bodybg">
-							<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icon_body3.png" class="" alt=""/></center>
-							<h2>Browse 24x7 Pharmacist</h2>
-							<p>Quickly order with those pharmacist available 24x7</p>
-							<input value="More Details" id="btnsubmit" type="submit" class="footer_moredetail">
-							<div class="clr"></div>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="col-md-6 rightbody">
-				<div class="farmacy">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/body_bg.jpg" class="bodybg" alt=""/>
-					<a href="javaScript:void(0);" class="hover_bodybg">
-						<div class="subhover_bodybg">
-							<center><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/icon_body4.png" class="" alt=""/></center>
-							<h2>Manage your prescriptions</h2>
-							<p>Save your prescription in cloud and set medicine reminders</p>
-							<input value="More Details" id="btnsubmit" type="submit" class="footer_moredetail">
-							<div class="clr"></div>
-						</div>
-					</a>
-				</div>
-			</div>
+			<?php endforeach;wp_reset_query();?>
 			<div class="clr"></div>
 		</div>	
 

@@ -1,7 +1,63 @@
-<?php 
-function wpmb_init () {
-	wpmb_register_post_type();
+<?php
+if(!session_id()) {
+	session_start();
 }
+function wpmb_init () {
+	global $wpdb;
+	wpmb_register_post_type();
+	$ch = isset($_REQUEST['wpmb_choice']) ? $_REQUEST['wpmb_choice'] : '';
+	switch($ch) {
+		case "contact_us" :
+			$ctbl = $wpdb->prefix."contactus";
+			$data = $_REQUEST['data'];
+			$data['create_date'] = date('Y-m-d H:i:s');
+			$wpdb->insert($ctbl, $data, array('%s','%s','%s','%s','%s','%s'));
+			$message  = __('Hi admin,') . "\r\n\r\n";
+			$message  .= $data['message'] . "\r\n\r\n";
+			$admin_email = get_option( 'admin_email' );
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$headers .= 'To: Admin <'.$admin_email.'>' . "\r\n";
+			$headers .= 'From: '.$data['first_name'].' <'.$data['email'].'>' . "\r\n";
+			$message = '<table><tr><td colspan="2"><h2>Message Details</h2></td></tr><tr><td>Name : </td><td>' . $data['first_name'] .  ' ' . $data['last_name'].'</td></tr><tr><td>Phone: </td><td>' .  $data['phone'] . '</td></tr><tr><td>Email: </td><td>' .  $data['email'] . '</td></tr><tr><td>Message: </td><td>'.$data['message'].'</td></tr></table>';
+			wp_mail($admin_email, 'Contact Us ...', $message, $headers);
+			$_SESSION['sucmsg'] = "Mail sent successfully. Please wait administrator will contact you soon!";
+			header("Location:".wpmb_cur_url());exit;
+			break;
+		case 'delete' : 
+			if($_GET['id'] > 0) {
+				global $wpdb;
+				$tbl = $wpdb->prefix.'contactus';
+				$sql = "DELETE FROM $tbl WHERE id='".$_GET['id']."'";       
+				$wpdb->query($sql); 
+				$_SESSION['msg'] = "<div  style='color:green; font-weight:bold;'>Record deleted successfully!</div>";
+				wp_redirect(wpmb_cur_url());
+			}
+			break;
+	}
+}
+
+function wpmb_contactus_manage() {
+	include "contents/contactus-list.php";
+}
+
+function wpmb_cur_url() {
+	$curl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+	$curl_arr = split('[?]',$curl);
+	$curl = $curl_arr[0]; 
+	
+	//Admin page option
+	if(!empty($_GET['page'])) {
+		$curl = add_query_arg( 'page', $_GET['page'],$curl);
+	}
+
+	//If permalink set as default
+	if(!empty($_GET['page_id'])) {
+		$curl = add_query_arg( 'page_id', $_GET['page_id'],$curl);
+	}
+	return $curl;
+}
+
 function wpmb_custom_title_filter ($str) {
 	if($str)
 		return $str;
@@ -56,6 +112,21 @@ function wpmb_navmenu() {
 		}
 	}
 	return $menu_list;
+}
+
+function wpmb_footermenu() {
+	$menu_name = 'footer';
+	if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+		$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+		$menu_items = wp_get_nav_menu_items($menu->term_id);
+		$menu_list = '<ul>';
+		foreach ( (array) $menu_items as $key => $menu_item ) {
+			$title = $menu_item->title;
+			$url = $menu_item->url;
+			$menu_list .= '<li><a href="' . $url . '">' . $title . '</a></li>';
+		}
+	}
+	return $menu_list.'</ul>';
 }
 
 function wpmb_homeslider () {
@@ -152,6 +223,22 @@ function wpmb_register_post_type() {
 		'public' => true,
 		'has_archive' => true,
 		'supports' => array( 'title', 'editor', 'author', 'excerpt', 'custom-fields', 'thumbnail' )
+		)
+	);
+
+	/*
+	* @Home bottom post type
+	*/
+	register_post_type( 'homeother',
+		array(
+			'labels' => array(
+				'name' => __( 'Home Other' ),
+				'singular_name' => __( 'homeother' )
+			),
+		'public' => true,
+		'has_archive' => true,
+		'supports' => array( 'title', 'editor', 'author', 'excerpt', 'custom-fields', 'thumbnail' ),
+		'rewrite' => true
 		)
 	);
 
@@ -292,4 +379,72 @@ function wpmb_includejs() {
 		}
 	</script>
 <?php } 
+
+##################################################################################
+    ######################  PAGINATION SCRIPTS START  ################################
+    ##################################################################################
+    //Split page data for pagination
+    if(!function_exists('wpmb_pagedata')) {
+        function wpmb_pagedata($sql,$rows,$page_rows) {
+            global $wpdb;
+            if (!(isset($_REQUEST['pagenum']))){
+                $pagenum = 1;
+            } else {
+                $pagenum = $_REQUEST['pagenum'];
+            }
+            $last = ceil($rows/$page_rows);
+            if ($pagenum < 1){
+                $pagenum = 1;
+            }else if ($pagenum > $last){
+                if($last > 0)
+                    $pagenum = $last;
+            }
+            $stlimit = ($pagenum - 1) * $page_rows;
+            $sql = $sql." LIMIT $stlimit,$page_rows";
+            $ret[0] = $wpdb->get_results($sql,ARRAY_A);
+            $ret[1] = $last;
+            $ret[2] = $pagenum;
+            return $ret;
+        }
+    }
+
+    //Page refresh pagination html
+    function wpmb_pagination($page,$page_nos,$path,$nodigit='',$choice='',$container='') {
+        $str .= "<div class='Pagination'><ul>";
+        if ($page[2] == 1){
+        }else{
+            //$url = add_query_arg( 'pagenum',1,$path);
+            //$str .= "<a href='$url'>First </a> ";
+            $previous = $page[2]-1;
+            $url = add_query_arg( 'pagenum',$previous,$path);
+            $str .= "<li><a href='$url'  class='black'> Previous </a></li>";
+        }
+        $min = max(1,$page[2]-$page_nos);
+        $max = min($page[2]+$page_nos, $page[1]);
+        
+        if(!$nodigit) {
+            for($i=$min;$i<=$max;$i++){
+                $url = add_query_arg('pagenum',$i,$path);
+                if ($i==$page[2]) {
+                    $str .= '<input type="hidden" name="pagenum" value="'.$i.'" />';
+                    $str .= "<li><a href='";
+                    $str .= "$url' class='gray'> ".$i." </a></li>";
+                } else {
+                    $str .= "<li><a href='";
+                    $str .= "$url'> ".$i." </a></li>";
+                }
+            }
+        }
+        
+        if ($page[2] == $page[1]){
+        }else{
+            $next = $page[2]+1;
+            $url = add_query_arg( 'pagenum',$next,$path);
+            $str .= "<li><a href='$url' class='black'> Next </a></li>";
+            //$url = add_query_arg( 'pagenum',$page[1],$path);
+            //$str .= " <a href='$url'> Last</a> ";
+        }
+        $str .= "</ul></div>";
+        return $str;
+    }
 ?>

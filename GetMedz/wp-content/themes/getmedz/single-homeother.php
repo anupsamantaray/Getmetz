@@ -1,13 +1,5 @@
 <?php
-/**
- * The template for displaying all single posts and attachments
- *
- * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
- */
-
-get_header('blog'); 
+get_header('homeother'); 
 ?>
 
 <section class="section-1">
@@ -39,24 +31,23 @@ get_header('blog');
 					<?php if (has_post_thumbnail( get_the_ID() ) ): ?>
 						<?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'single-post-thumbnail' );?>
 						<img src="<?php echo $image[0];?>" class="body-image"/>
+						<div class="social">               
+							<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/share.png"/> 
+							<ul><!--social ul-->
+								<li><a href="#"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/facebook.png" alt="Facebook"/></a></li>
+								<li><a href="#"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/twitter.png" alt="Twitter"/></a></li>
+								<li><a href="#"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/google-plus.png" alt="Google plus"/></a></li>
+								<li><a href="#"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/in.png" alt="In"/></a></li>
+							</ul><!--social ul end-->                 
+						</div>
 					<?php endif;?>
-					
-					<div class="social">               
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/share.png"/> 
-						<ul><!--social ul-->
-							<li><a href="#"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/facebook.png" alt="Facebook"/></a></li>
-							<li><a href="#"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/twitter.png" alt="Twitter"/></a></li>
-							<li><a href="#"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/google-plus.png" alt="Google plus"/></a></li>
-							<li><a href="#"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/in.png" alt="In"/></a></li>
-						</ul><!--social ul end-->                 
-					</div>
 				</div>
 				 <div class="section-content text-justify">
 					<p><?php the_content()?></p>
 				 </div>
 			</div>			
 		<?php endwhile; ?>
-		<?php get_sidebar( 'blog' ); ?>
+		<?php //get_sidebar( 'blog' ); ?>
 	</div>
 </section> 
 <?php get_footer(); ?>

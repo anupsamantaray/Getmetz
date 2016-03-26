@@ -3,25 +3,33 @@
 	<h1 class="titletext_three">Contact Info</h1>
 	<p>You can contact us any way that is convenient for you. We are available 24/7 via fax, email or telephone. You can also use a quick contact form on the right or visit our office personally.Email us with any questions or inquiries or use our contact data. We would be happy to answer your questions.</p>
 	<div class="common_bodydiv">
+		<?php if($_SESSION['sucmsg']) : ?>
+			<div>
+				<?php  echo $_SESSION['sucmsg']; unset($_SESSION['sucmsg']);?>
+			</div>
+		<?php endif?>
 		<div class="col-md-6 commonleft">
 			<h2>Contact form</h2>
 			<div class="contact_from">
-				<div class="col-sm-6 fronLeft">
-					<input class="inputfrom" id="focusedinput" placeholder="Fast Name" type="text">
-				</div>
-				<div class="col-sm-6 fronLeft">
-					<input class="inputfrom" id="focusedinput" placeholder="Last Name" type="text">
-				</div>
-				<div class="col-sm-6 fronLeft">
-					<input class="inputfrom" id="focusedinput" placeholder="Email" type="text">
-				</div>
-				<div class="col-sm-6 fronLeft">
-					<input class="inputfrom" id="focusedinput" placeholder="Phone no." type="text">
-				</div>
-				<div class="col-sm-12 fronLeft">
-					<textarea name="txtarea1" id="txtarea1" rows="4" class="inputfrom" placeholder="Your Message..."></textarea>
-					<input value="SEND" class="send_button" type="submit">
-				</div>
+				<form action="" method="post" id="contactus_form">
+					<div class="col-sm-6 fronLeft">
+						<input class="inputfrom" id="first_name" placeholder="Fast Name" type="text" name="data[first_name]">
+					</div>
+					<div class="col-sm-6 fronLeft">
+						<input class="inputfrom" id="last_name" placeholder="Last Name" type="text" name="data[last_name]">
+					</div>
+					<div class="col-sm-6 fronLeft">
+						<input class="inputfrom" id="email" placeholder="Email" type="text" name="data[email]">
+					</div>
+					<div class="col-sm-6 fronLeft">
+						<input class="inputfrom" id="phone" placeholder="Phone no." type="text" name="data[phone]">
+					</div>
+					<div class="col-sm-12 fronLeft">
+						<textarea id="message" rows="4" class="inputfrom" placeholder="Your Message..." name="data[message]"></textarea>
+						<input value="SEND" class="send_button" type="button" id="send_quote_btn">
+					</div>
+					<input type="hidden" value="contact_us" name="wpmb_choice">
+				</form>
 				<div class="clr"></div>
 			</div>
 		</div>
@@ -31,3 +39,38 @@
 		<div class="clr"></div>
 	</div>
 </div>
+<script>
+	jQuery("#send_quote_btn").bind('click', function() {
+		var isValid = true;
+		var msg = '';
+		var first_name = jQuery("#first_name").val();
+		var last_name = jQuery("#last_name").val();
+		var email = jQuery("#email").val();
+		var phone = jQuery("#phone").val();
+		var message = jQuery("#message").val();
+		if(first_name == '') {
+			msg += 'Enter First Name' + "\n";
+			isValid = false;
+		}
+		if(last_name == '') {
+			msg += 'Enter Lat Name' + "\n";
+			isValid = false;
+		}
+		if(email == '') {
+			msg += 'Enter email' + "\n";
+			isValid = false;
+		}if(phone == '') {
+			msg += 'Enter phone' + "\n";
+			isValid = false;
+		}
+		if(message == '') {
+			msg += 'Enter message' + "\n";
+			isValid = false;
+		}
+		if(isValid) {
+			jQuery("#contactus_form").submit();
+		} else {
+			alert(msg);
+		}
+	});
+</script>
