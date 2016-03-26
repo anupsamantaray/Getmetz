@@ -1,0 +1,24 @@
+https://github.com/jhaspider/Natter.git
+
+
+ 1. git clone server_path local_path
+
+ 2. When adding a file
+
+ git add .
+ git commit -a
+ git push origin master
+
+
+ 2. When Editing a file
+
+ git pull
+ git commit -a
+ git push origin master
+
+
+ 3. When deleted something
+
+ git pull
+ git commit -a
+ git push origin master
