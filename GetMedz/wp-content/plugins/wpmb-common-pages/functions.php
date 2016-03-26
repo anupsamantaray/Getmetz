@@ -82,6 +82,32 @@ function wpmb_homeslider () {
 	}
 	return $str;
 }
+function wpmb_create_table() {
+	global $wpdb;
+	echo "CREATE TABLE IF NOT EXISTS `".$wpdb->prefix."contactus` (
+		  `id` int(11) NOT NULL auto_increment,
+		  `first_name` varchar(255) default NULL,
+		  `last_name` varchar(255) default NULL,
+		  `phone` varchar(255) default NULL,
+		  `email` varchar(255) default NULL,
+		  `message` text default NULL,
+		  is_deleted varchar(1) default 0,
+		  `create_date` datetime,
+		  PRIMARY KEY (`id`)
+		)";
+	$wpdb->query("CREATE TABLE IF NOT EXISTS `".$wpdb->prefix."contactus` (
+		  `id` int(11) NOT NULL auto_increment,
+		  `first_name` varchar(255) default NULL,
+		  `last_name` varchar(255) default NULL,
+		  `phone` varchar(255) default NULL,
+		  `email` varchar(255) default NULL,
+		  `message` text default NULL,
+		  is_deleted varchar(1) default 0,
+		  `create_date` datetime,
+		  PRIMARY KEY (`id`)
+		)"
+	);
+}
 
 function wpmb_register_post_type() {
 	/*

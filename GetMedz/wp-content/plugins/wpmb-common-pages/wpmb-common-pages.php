@@ -10,6 +10,7 @@ include "functions.php";
 add_filter('wpmb_custom_title', 'wpmb_custom_title_filter',10,3);
 add_action('init','wpmb_init');
 add_action('wp_head', 'wpmb_includejs');
+add_action('plugins_loaded', 'wpmb_create_table');
 
 /*Shortcodes */
 add_shortcode('WPMB_BLOG', 'wpmb_blog');
