@@ -232,8 +232,24 @@ function wpmb_register_post_type() {
 	register_post_type( 'homeother',
 		array(
 			'labels' => array(
-				'name' => __( 'Home Other' ),
+				'name' => __( 'Home Bottom' ),
 				'singular_name' => __( 'homeother' )
+			),
+		'public' => true,
+		'has_archive' => true,
+		'supports' => array( 'title', 'editor', 'author', 'excerpt', 'custom-fields', 'thumbnail' ),
+		'rewrite' => true
+		)
+	);
+
+	/*
+	* @Customer Feedback post type
+	*/
+	register_post_type( 'custfeedback',
+		array(
+			'labels' => array(
+				'name' => __( 'Customer Feedback' ),
+				'singular_name' => __( 'custfeedback' )
 			),
 		'public' => true,
 		'has_archive' => true,

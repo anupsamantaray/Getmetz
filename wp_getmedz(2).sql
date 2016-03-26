@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 26, 2016 at 08:16 AM
+-- Generation Time: Mar 26, 2016 at 03:43 PM
 -- Server version: 5.1.33
 -- PHP Version: 5.2.9
 
@@ -25,6 +25,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `wp_commentmeta`
 --
 
+DROP TABLE IF EXISTS `wp_commentmeta`;
 CREATE TABLE IF NOT EXISTS `wp_commentmeta` (
   `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `comment_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -46,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `wp_commentmeta` (
 -- Table structure for table `wp_comments`
 --
 
+DROP TABLE IF EXISTS `wp_comments`;
 CREATE TABLE IF NOT EXISTS `wp_comments` (
   `comment_ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `comment_post_ID` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -83,6 +85,7 @@ INSERT INTO `wp_comments` (`comment_ID`, `comment_post_ID`, `comment_author`, `c
 -- Table structure for table `wp_contactus`
 --
 
+DROP TABLE IF EXISTS `wp_contactus`;
 CREATE TABLE IF NOT EXISTS `wp_contactus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) DEFAULT NULL,
@@ -109,6 +112,7 @@ INSERT INTO `wp_contactus` (`id`, `first_name`, `last_name`, `phone`, `email`, `
 -- Table structure for table `wp_links`
 --
 
+DROP TABLE IF EXISTS `wp_links`;
 CREATE TABLE IF NOT EXISTS `wp_links` (
   `link_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `link_url` varchar(255) NOT NULL DEFAULT '',
@@ -138,6 +142,7 @@ CREATE TABLE IF NOT EXISTS `wp_links` (
 -- Table structure for table `wp_options`
 --
 
+DROP TABLE IF EXISTS `wp_options`;
 CREATE TABLE IF NOT EXISTS `wp_options` (
   `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `option_name` varchar(191) NOT NULL DEFAULT '',
@@ -254,7 +259,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (101, 'widget_tag_cloud', 'a:1:{s:12:"_multiwidget";i:1;}', 'yes'),
 (102, 'widget_nav_menu', 'a:1:{s:12:"_multiwidget";i:1;}', 'yes'),
 (103, 'cron', 'a:4:{i:1459010287;a:3:{s:16:"wp_version_check";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:17:"wp_update_plugins";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:16:"wp_update_themes";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}}i:1459011247;a:1:{s:19:"wp_scheduled_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1459012841;a:1:{s:30:"wp_scheduled_auto_draft_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}s:7:"version";i:2;}', 'yes'),
-(106, '_transient_random_seed', 'bbc6c823cc7e09dc7e28dd9ab08adf21', 'yes'),
+(106, '_transient_random_seed', 'e15ea6dbb205714501081c351556bc6f', 'yes'),
 (107, 'nonce_key', 'zum?0Pt: cP&W[9jnl,uKmkoDs>{p&tB6?z?w(sm<L>J(Ew/KVQM{/ZcLAO=re%h', 'yes'),
 (108, 'nonce_salt', ']v-mCA|30 Hdlum1eK[SDcEEm/Ag8eQuh,Sg3%sEl`GQ</(-w70SA;>H b>anw*f', 'yes'),
 (111, '_site_transient_update_core', 'O:8:"stdClass":4:{s:7:"updates";a:1:{i:0;O:8:"stdClass":10:{s:8:"response";s:6:"latest";s:8:"download";s:59:"https://downloads.wordpress.org/release/wordpress-4.4.2.zip";s:6:"locale";s:5:"en_US";s:8:"packages";O:8:"stdClass":5:{s:4:"full";s:59:"https://downloads.wordpress.org/release/wordpress-4.4.2.zip";s:10:"no_content";s:70:"https://downloads.wordpress.org/release/wordpress-4.4.2-no-content.zip";s:11:"new_bundled";s:71:"https://downloads.wordpress.org/release/wordpress-4.4.2-new-bundled.zip";s:7:"partial";b:0;s:8:"rollback";b:0;}s:7:"current";s:5:"4.4.2";s:7:"version";s:5:"4.4.2";s:11:"php_version";s:5:"5.2.4";s:13:"mysql_version";s:3:"5.0";s:11:"new_bundled";s:3:"4.4";s:15:"partial_version";s:0:"";}}s:12:"last_checked";i:1458970545;s:15:"version_checked";s:5:"4.4.2";s:12:"translations";a:0:{}}', 'yes'),
@@ -304,6 +309,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 -- Table structure for table `wp_postmeta`
 --
 
+DROP TABLE IF EXISTS `wp_postmeta`;
 CREATE TABLE IF NOT EXISTS `wp_postmeta` (
   `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `post_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -312,7 +318,7 @@ CREATE TABLE IF NOT EXISTS `wp_postmeta` (
   PRIMARY KEY (`meta_id`),
   KEY `post_id` (`post_id`),
   KEY `meta_key` (`meta_key`(191))
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=225 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=235 ;
 
 --
 -- Dumping data for table `wp_postmeta`
@@ -489,7 +495,7 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (212, 56, '_menu_item_xfn', ''),
 (213, 56, '_menu_item_url', ''),
 (215, 57, '_edit_last', '1'),
-(216, 57, '_edit_lock', '1458980027:1'),
+(216, 57, '_edit_lock', '1458980274:1'),
 (217, 58, '_wp_attached_file', '2016/03/about_1.jpg'),
 (218, 58, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:699;s:6:"height";i:499;s:4:"file";s:19:"2016/03/about_1.jpg";s:5:"sizes";a:2:{s:9:"thumbnail";a:4:{s:4:"file";s:19:"about_1-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:19:"about_1-300x214.jpg";s:5:"width";i:300;s:6:"height";i:214;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
 (219, 57, '_thumbnail_id', '58'),
@@ -497,7 +503,17 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (221, 60, '_edit_lock', '1458979874:1'),
 (222, 61, '_wp_attached_file', '2016/03/about_2.jpg'),
 (223, 61, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:644;s:6:"height";i:499;s:4:"file";s:19:"2016/03/about_2.jpg";s:5:"sizes";a:2:{s:9:"thumbnail";a:4:{s:4:"file";s:19:"about_2-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:19:"about_2-300x232.jpg";s:5:"width";i:300;s:6:"height";i:232;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
-(224, 60, '_thumbnail_id', '61');
+(224, 60, '_thumbnail_id', '61'),
+(225, 63, '_edit_last', '1'),
+(226, 63, '_edit_lock', '1459002813:1'),
+(227, 64, '_wp_attached_file', '2016/03/nopic.png'),
+(228, 64, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:73;s:6:"height";i:73;s:4:"file";s:17:"2016/03/nopic.png";s:5:"sizes";a:0:{}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}'),
+(229, 63, '_thumbnail_id', '64'),
+(230, 63, 'username', 'Anup S'),
+(231, 65, '_edit_last', '1'),
+(232, 65, '_edit_lock', '1459003015:1'),
+(233, 65, '_thumbnail_id', '64'),
+(234, 65, 'username', 'Manoj b');
 
 -- --------------------------------------------------------
 
@@ -505,6 +521,7 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 -- Table structure for table `wp_posts`
 --
 
+DROP TABLE IF EXISTS `wp_posts`;
 CREATE TABLE IF NOT EXISTS `wp_posts` (
   `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `post_author` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -534,7 +551,7 @@ CREATE TABLE IF NOT EXISTS `wp_posts` (
   KEY `type_status_date` (`post_type`,`post_status`,`post_date`,`ID`),
   KEY `post_parent` (`post_parent`),
   KEY `post_author` (`post_author`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=63 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
 
 --
 -- Dumping data for table `wp_posts`
@@ -594,7 +611,10 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (59, 1, '2016-03-26 07:58:18', '2016-03-26 07:58:18', '<h3>Vision</h3>\r\n<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>\r\n<h3>Mission</h3>\r\n<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>', 'Vision & Mission', '', 'inherit', 'closed', 'closed', '', '57-revision-v1', '', '', '2016-03-26 07:58:18', '2016-03-26 07:58:18', '', 57, 'http://localhost/Getmetz/GetMedz/57-revision-v1/', 0, 'revision', '', 0),
 (60, 1, '2016-03-26 07:59:21', '2016-03-26 07:59:21', '<ul>\r\n				<li>Lorem Ipsum is simply dummy text of the printing</li>\r\n				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>\r\n				<li>Lorem Ipsum is simply dummy text of the printing</li>\r\n				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>\r\n				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>\r\n			</ul>', 'Why Us & Some statistics', '', 'publish', 'closed', 'closed', '', 'why-us-some-statistics', '', '', '2016-03-26 08:13:26', '2016-03-26 08:13:26', '', 2, 'http://localhost/Getmetz/GetMedz/?page_id=60', 2, 'page', '', 0),
 (61, 1, '2016-03-26 07:59:15', '2016-03-26 07:59:15', '', 'about_2', '', 'inherit', 'open', 'closed', '', 'about_2', '', '', '2016-03-26 07:59:15', '2016-03-26 07:59:15', '', 60, 'http://localhost/Getmetz/GetMedz/wp-content/uploads/2016/03/about_2.jpg', 0, 'attachment', 'image/jpeg', 0),
-(62, 1, '2016-03-26 07:59:21', '2016-03-26 07:59:21', '<ul>\r\n				<li>Lorem Ipsum is simply dummy text of the printing</li>\r\n				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>\r\n				<li>Lorem Ipsum is simply dummy text of the printing</li>\r\n				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>\r\n				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>\r\n			</ul>', 'Why Us & Some statistics', '', 'inherit', 'closed', 'closed', '', '60-revision-v1', '', '', '2016-03-26 07:59:21', '2016-03-26 07:59:21', '', 60, 'http://localhost/Getmetz/GetMedz/60-revision-v1/', 0, 'revision', '', 0);
+(62, 1, '2016-03-26 07:59:21', '2016-03-26 07:59:21', '<ul>\r\n				<li>Lorem Ipsum is simply dummy text of the printing</li>\r\n				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>\r\n				<li>Lorem Ipsum is simply dummy text of the printing</li>\r\n				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>\r\n				<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</li>\r\n			</ul>', 'Why Us & Some statistics', '', 'inherit', 'closed', 'closed', '', '60-revision-v1', '', '', '2016-03-26 07:59:21', '2016-03-26 07:59:21', '', 60, 'http://localhost/Getmetz/GetMedz/60-revision-v1/', 0, 'revision', '', 0),
+(63, 1, '2016-03-26 14:35:54', '2016-03-26 14:35:54', 'Amazing service. I was able to save more than 10% on my order and it was delivered to my doorstep in quick time.', 'Title', '', 'publish', 'closed', 'closed', '', 'title', '', '', '2016-03-26 14:35:54', '2016-03-26 14:35:54', '', 0, 'http://localhost/Getmetz/GetMedz/?post_type=custfeedback&#038;p=63', 0, 'custfeedback', '', 0),
+(64, 1, '2016-03-26 14:35:40', '2016-03-26 14:35:40', '', 'nopic', '', 'inherit', 'open', 'closed', '', 'nopic', '', '', '2016-03-26 14:35:40', '2016-03-26 14:35:40', '', 63, 'http://localhost/Getmetz/GetMedz/wp-content/uploads/2016/03/nopic.png', 0, 'attachment', 'image/png', 0),
+(65, 1, '2016-03-26 14:36:55', '2016-03-26 14:36:55', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.', 'T1', '', 'publish', 'closed', 'closed', '', 't1', '', '', '2016-03-26 14:36:55', '2016-03-26 14:36:55', '', 0, 'http://localhost/Getmetz/GetMedz/?post_type=custfeedback&#038;p=65', 0, 'custfeedback', '', 0);
 
 -- --------------------------------------------------------
 
@@ -602,6 +622,7 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 -- Table structure for table `wp_termmeta`
 --
 
+DROP TABLE IF EXISTS `wp_termmeta`;
 CREATE TABLE IF NOT EXISTS `wp_termmeta` (
   `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `term_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -623,6 +644,7 @@ CREATE TABLE IF NOT EXISTS `wp_termmeta` (
 -- Table structure for table `wp_terms`
 --
 
+DROP TABLE IF EXISTS `wp_terms`;
 CREATE TABLE IF NOT EXISTS `wp_terms` (
   `term_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL DEFAULT '',
@@ -652,6 +674,7 @@ INSERT INTO `wp_terms` (`term_id`, `name`, `slug`, `term_group`) VALUES
 -- Table structure for table `wp_term_relationships`
 --
 
+DROP TABLE IF EXISTS `wp_term_relationships`;
 CREATE TABLE IF NOT EXISTS `wp_term_relationships` (
   `object_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `term_taxonomy_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -691,6 +714,7 @@ INSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`, `term_orde
 -- Table structure for table `wp_term_taxonomy`
 --
 
+DROP TABLE IF EXISTS `wp_term_taxonomy`;
 CREATE TABLE IF NOT EXISTS `wp_term_taxonomy` (
   `term_taxonomy_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `term_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -722,6 +746,7 @@ INSERT INTO `wp_term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `desc
 -- Table structure for table `wp_usermeta`
 --
 
+DROP TABLE IF EXISTS `wp_usermeta`;
 CREATE TABLE IF NOT EXISTS `wp_usermeta` (
   `umeta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -750,7 +775,7 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (11, 1, 'wp_user_level', '10'),
 (12, 1, 'dismissed_wp_pointers', ''),
 (13, 1, 'show_welcome_panel', '1'),
-(14, 1, 'session_tokens', 'a:4:{s:64:"39e7b699a6dd456d05e4c4b54d923337339f8fdaae627f13991d1ae80fef36b5";a:4:{s:10:"expiration";i:1459009758;s:2:"ip";s:9:"127.0.0.1";s:2:"ua";s:65:"Mozilla/5.0 (Windows NT 6.3; rv:46.0) Gecko/20100101 Firefox/46.0";s:5:"login";i:1458836958;}s:64:"42afa66632060e34761304a45d5979ef3158ac0d06446ce7e35f77861d283c1e";a:4:{s:10:"expiration";i:1459057655;s:2:"ip";s:9:"127.0.0.1";s:2:"ua";s:65:"Mozilla/5.0 (Windows NT 6.3; rv:46.0) Gecko/20100101 Firefox/46.0";s:5:"login";i:1458884855;}s:64:"3aeef0fecf6c1f8d8d23f90f436fc6660097690db67179aeee957eebf091540d";a:4:{s:10:"expiration";i:1459084124;s:2:"ip";s:9:"127.0.0.1";s:2:"ua";s:65:"Mozilla/5.0 (Windows NT 6.3; rv:46.0) Gecko/20100101 Firefox/46.0";s:5:"login";i:1458911324;}s:64:"241a76b744dd51645a9188c010882dd3366d1ead21a2f401234a5fa65edb89c3";a:4:{s:10:"expiration";i:1459143355;s:2:"ip";s:9:"127.0.0.1";s:2:"ua";s:65:"Mozilla/5.0 (Windows NT 6.3; rv:46.0) Gecko/20100101 Firefox/46.0";s:5:"login";i:1458970555;}}'),
+(14, 1, 'session_tokens', 'a:5:{s:64:"39e7b699a6dd456d05e4c4b54d923337339f8fdaae627f13991d1ae80fef36b5";a:4:{s:10:"expiration";i:1459009758;s:2:"ip";s:9:"127.0.0.1";s:2:"ua";s:65:"Mozilla/5.0 (Windows NT 6.3; rv:46.0) Gecko/20100101 Firefox/46.0";s:5:"login";i:1458836958;}s:64:"42afa66632060e34761304a45d5979ef3158ac0d06446ce7e35f77861d283c1e";a:4:{s:10:"expiration";i:1459057655;s:2:"ip";s:9:"127.0.0.1";s:2:"ua";s:65:"Mozilla/5.0 (Windows NT 6.3; rv:46.0) Gecko/20100101 Firefox/46.0";s:5:"login";i:1458884855;}s:64:"3aeef0fecf6c1f8d8d23f90f436fc6660097690db67179aeee957eebf091540d";a:4:{s:10:"expiration";i:1459084124;s:2:"ip";s:9:"127.0.0.1";s:2:"ua";s:65:"Mozilla/5.0 (Windows NT 6.3; rv:46.0) Gecko/20100101 Firefox/46.0";s:5:"login";i:1458911324;}s:64:"241a76b744dd51645a9188c010882dd3366d1ead21a2f401234a5fa65edb89c3";a:4:{s:10:"expiration";i:1459143355;s:2:"ip";s:9:"127.0.0.1";s:2:"ua";s:65:"Mozilla/5.0 (Windows NT 6.3; rv:46.0) Gecko/20100101 Firefox/46.0";s:5:"login";i:1458970555;}s:64:"db98c3a27749dfd2b7537dd5a2c9f3ec1c46a81f639874024aa7baf589331bc8";a:4:{s:10:"expiration";i:1459175619;s:2:"ip";s:9:"127.0.0.1";s:2:"ua";s:65:"Mozilla/5.0 (Windows NT 6.3; rv:46.0) Gecko/20100101 Firefox/46.0";s:5:"login";i:1459002819;}}'),
 (15, 1, 'wp_dashboard_quick_press_last_post_id', '3'),
 (16, 1, 'wp_user-settings', 'editor=html&libraryContent=browse'),
 (17, 1, 'wp_user-settings-time', '1458979094'),
@@ -766,6 +791,7 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 -- Table structure for table `wp_users`
 --
 
+DROP TABLE IF EXISTS `wp_users`;
 CREATE TABLE IF NOT EXISTS `wp_users` (
   `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_login` varchar(60) NOT NULL DEFAULT '',
