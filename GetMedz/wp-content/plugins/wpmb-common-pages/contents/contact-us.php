@@ -7,19 +7,24 @@
 	.red-border {
 		border: 1px solid #FF0000 !important;
 	}
+	
+	.suc_msg_section {
+		color: green;
+		margin-bottom: 10px;
+	}
 </style>
 <div class="about_body">
 	<h1 class="titletext_three">Contact Info</h1>
 	<p>You can contact us any way that is convenient for you. We are available 24/7 via fax, email or telephone. You can also use a quick contact form on the right or visit our office personally.Email us with any questions or inquiries or use our contact data. We would be happy to answer your questions.</p>
-	<div class="common_bodydiv">
-		<?php if($_SESSION['sucmsg']) : ?>
-			<div>
-				<?php  echo $_SESSION['sucmsg']; unset($_SESSION['sucmsg']);?>
-			</div>
-		<?php endif?>
+	<div class="common_bodydiv">		
 		<div class="col-md-6 commonleft">
 			<h2>Contact form</h2>
 			<div class="contact_from">
+				<?php if($_SESSION['sucmsg']) : ?>
+					<div class="suc_msg_section">
+						<?php  echo $_SESSION['sucmsg']; unset($_SESSION['sucmsg']);?>
+					</div>
+				<?php endif?>
 				<form action="" method="post" id="contactus_form">
 					<div class="col-sm-6 fronLeft">
 						<input class="inputfrom" id="first_name" placeholder="Fast Name" type="text" name="data[first_name]">
