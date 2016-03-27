@@ -1,4 +1,13 @@
 <!--body_content-->	
+<style>
+	.myclass::-webkit-input-placeholder, .myclass::input-placeholder{ 
+		color: #FF0000;
+	}
+	
+	.red-border {
+		border: 1px solid #FF0000 !important;
+	}
+</style>
 <div class="about_body">
 	<h1 class="titletext_three">Contact Info</h1>
 	<p>You can contact us any way that is convenient for you. We are available 24/7 via fax, email or telephone. You can also use a quick contact form on the right or visit our office personally.Email us with any questions or inquiries or use our contact data. We would be happy to answer your questions.</p>
@@ -41,36 +50,63 @@
 </div>
 <script>
 	jQuery("#send_quote_btn").bind('click', function() {
+		$("#first_name, #last_name, #email, #phone, #message").removeClass('red-border');
+		var fname 	= $("#first_name").val();
+		var lname 	= $("#last_name").val();
+		var emails 	= $("#email").val();
+		var mobile	= $("#phone").val();
+		var messag 	= $("#message").val();
+		var email 	= document.getElementById('email');
+		var filter 	= /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			
 		var isValid = true;
-		var msg = '';
-		var first_name = jQuery("#first_name").val();
-		var last_name = jQuery("#last_name").val();
-		var email = jQuery("#email").val();
-		var phone = jQuery("#phone").val();
-		var message = jQuery("#message").val();
-		if(first_name == '') {
-			msg += 'Enter First Name' + "\n";
+		if(fname==''){
+			$("#first_name").attr('placeholder',"Enter first name.");
+			$('#first_name').addClass('myclass');
+			$('#first_name').addClass('red-border');
 			isValid = false;
 		}
-		if(last_name == '') {
-			msg += 'Enter Lat Name' + "\n";
+		if(messag==''){
+			$("#message").attr('placeholder',"Enter message.");
+			$('#message').addClass('myclass');
+			$('#message').addClass('red-border');
 			isValid = false;
 		}
-		if(email == '') {
-			msg += 'Enter email' + "\n";
+		/* if(lname==''){
+			$("#last_name").attr('placeholder',"Enter last name.");
 			isValid = false;
-		}if(phone == '') {
-			msg += 'Enter phone' + "\n";
+		} */
+		if(emails==''){
+			$("#email").attr('placeholder',"Enter email id.");
+			$('#email').addClass('myclass');
+			$('#email').addClass('red-border');
 			isValid = false;
+		} else {
+			if(!filter.test(email.value)){
+				$("#email").val("");
+				$("#email").attr('placeholder',"Enter valid  email id.");
+				$('#email').addClass('myclass');
+				$('#email').addClass('red-border');
+				isValid = false;
+			}
 		}
-		if(message == '') {
-			msg += 'Enter message' + "\n";
+		
+		if(mobile==''){
+			$("#phone").attr('placeholder',"Enter mobile no.");
+			$('#phone').addClass('myclass');
+			$('#phone').addClass('red-border');
 			isValid = false;
+		} else{
+			if(((mobile.length) < 10) || ((mobile.length) > 10) || (isNaN(mobile))){
+				$("#phone").val("");
+				$("#phone").attr('placeholder',"Enter valid mobile No");
+				$('#phone').addClass('myclass');
+				$('#phone').addClass('red-border');
+				isValid = false;
+			}	
 		}
 		if(isValid) {
 			jQuery("#contactus_form").submit();
-		} else {
-			alert(msg);
 		}
 	});
 </script>
