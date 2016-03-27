@@ -44,6 +44,8 @@ get_header(); ?>
 										<img src="<?php echo $image[0];?>" class="nopic" alt=""/>
 										<h3>
 											<span><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/left.png" class="" alt=""/></span><?php echo get_post_meta($postdata->ID, 'username', true);?>
+											<?php echo $postdata->post_title?>
+											
 											<span><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/right.png" class="" alt=""/></span>
 										</h3>
 										<p><?php echo $postdata->post_content?></p>
