@@ -3,11 +3,11 @@
 		<div class="aside-top">
 			<!--form search-->
 			<div class="input-holder">
-				<form action="#">
+				<form action="<?php bloginfo('home');?>" method="get">
 					<div class="input-group">
-						  <input type="text" class="form-control" placeholder="Search for" >
+						  <input type="text" name="s" class="form-control" placeholder="Search for" >
 						  <span class="input-group-btn">
-							<button class="btn btn-default" type="button">Go!</button>
+							<button class="btn btn-default" type="submit">Go!</button>
 						</span>
 					 </div><!-- /input-group -->
 				</form>

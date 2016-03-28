@@ -58,8 +58,7 @@
 					<img src="<?php echo $image[0]; ?>" class="about_1" alt=""/>					
 				</div>
 			<?php endif;?>
-			</div>
-			<div class="clr"></div>
 		</div>
+		<div class="clr"></div>
 	<?php endforeach; wp_reset_query();?>
 </div>

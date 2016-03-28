@@ -59,10 +59,14 @@ function wpmb_cur_url() {
 }
 
 function wpmb_custom_title_filter ($str) {
-	if($str)
-		return $str;
-	global $post;
-	return get_the_title( $post->ID);
+	if(is_search() ) {
+		return "Search Results for : ". $_GET['s'];
+	} else {
+		if($str)
+			return $str;
+		global $post;
+		return get_the_title( $post->ID);
+	}
 }
 
 function wpmb_aboutus() {
