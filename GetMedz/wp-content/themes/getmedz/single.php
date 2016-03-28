@@ -44,9 +44,12 @@ get_header('blog');
 					<div class="social">               
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/share.png"/> 
 						<ul><!--social ul-->
-							<li><a href="#"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/facebook.png" alt="Facebook"/></a></li>
-							<li><a href="#"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/twitter.png" alt="Twitter"/></a></li>
-							<li><a href="#"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/google-plus.png" alt="Google plus"/></a></li>
+							<li><a href="https://www.facebook.com/sharer.php?u=<?php echo get_page_link($_GET['p']);?>?postId=<?=$post->ID;?>&postDate=<?=$postDate;?>&postDay=<?=$postDay;?>&postYear=<?=$postYear;?>&author=<?=$author;?>&title=<?=$title;?>&content=<?=$c;?>&t=<?php echo urlencode($post->post_title); ?>" target="_blank"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/facebook.png" alt="Facebook"/></a></li>
+							
+							<li><a href="http://twitter.com/share?text=<?php echo urlencode($post->post_title); ?>&url=<?php echo get_page_link($_GET['p']);?>?postId=<?=$post->ID;?>&postDate=<?=$postDate;?>&postDay=<?=$postDay;?>&postYear=<?=$postYear;?>&author=<?=$author;?>&title=<?=$title;?>&content=<?=$c;?>" target="_blank"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/twitter.png" alt="Twitter"/></a></li>
+							
+							<li><a href="https://plus.google.com/share?url=<?php echo get_page_link($_GET['p']);?>?postId=<?=$post->ID;?>&postDate=<?=$postDate;?>&postDay=<?=$postDay;?>&postYear=<?=$postYear;?>&author=<?=$author;?>&title=<?=$title;?>&content=<?=$c;?>" target="_blank"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/google-plus.png" alt="Google plus"/></a></li>
+							
 							<li><a href="#"> <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/in.png" alt="In"/></a></li>
 						</ul><!--social ul end-->                 
 					</div>
