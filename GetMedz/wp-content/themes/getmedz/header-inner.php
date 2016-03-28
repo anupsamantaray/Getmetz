@@ -39,7 +39,7 @@
 				<a href="javaScript:void(0);" style="margin-right:50px;">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/menuicon.png" class="menuicon" alt=""/>
 				</a>
-				<a href="javaScript:void(0);">
+				<a href="<?php bloginfo('home');?>">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo.png" class="" alt=""/>
 				</a>
 			</div>

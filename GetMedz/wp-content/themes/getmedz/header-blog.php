@@ -21,25 +21,24 @@
 <!--body-->
 	<div class="bodycon">
 		<div class="menu_nav" style="z-index:9999;">
-					<div class="second_logo">
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/slide_menulogo.png" class="" alt=""/>
-						<div class="slide_cross">
-							<a href="javaScript:void(0);"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/cross_icon.png" class="" alt=""/></a>
-						</div>
-					</div>
-					<div class="navisation">
-						<?php echo wpmb_navmenu();?>
-						<div class="clr"></div>
-					</div>
+			<div class="second_logo">
+				<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/slide_menulogo.png" class="" alt=""/>
+				<div class="slide_cross">
+					<a href="javaScript:void(0);"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/cross_icon.png" class="" alt=""/></a>
 				</div>
+			</div>
+			<div class="navisation">
+				<?php echo wpmb_navmenu();?>
+				<div class="clr"></div>
+			</div>
+		</div>
 				
-			<div class="iner_hader">
-			
+		<div class="iner_hader">
 			<div class="col-md-6 sub_hader">
 				<a href="javaScript:void(0);" style="margin-right:50px;">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/menuicon.png" class="menuicon" alt=""/>
 				</a>
-				<a href="javaScript:void(0);">
+				<a href="<?php bloginfo('home');?>">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo.png" class="" alt=""/>
 				</a>
 			</div>

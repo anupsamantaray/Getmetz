@@ -18,7 +18,12 @@
 			<tbody>
 				<tr class="ft_header">
 					<td><b>Sl No</b></td>
-					<td><b>Text</b></td>
+					<td><b>First Name</b></td>
+					<td><b>Last Name</b></td>
+					<td><b>Email</b></td>
+					<td><b>Contact No</b></td>
+					<td><b>Message</b></td>
+					<td><b>Date/Time</b></td>
 					<td width="100"><b>Action</b></td>
 				</tr>
 				<?php if(!empty($c_content)) : ?>
