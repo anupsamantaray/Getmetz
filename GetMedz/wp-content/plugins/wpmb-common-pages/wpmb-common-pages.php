@@ -20,7 +20,9 @@ add_shortcode('WPMB_FAQS', 'wpmb_faqs');
 add_shortcode('WPMB_ABOUTUS', 'wpmb_aboutus');
 
 function wpmb_admin_menu() {
-	add_menu_page("Contact Us","Contact Us",8,basename(__FILE__),"wpmb_contactus_manage");	
+	add_menu_page("Contact Us List","Contact Us List",8,basename(__FILE__),"wpmb_contactus_manage");
+	add_submenu_page('wpmb-common-pages.php', 'All Entries', 'All Entries', 8, basename(__FILE__), 'wpmb_contactus_manage');
+	add_submenu_page("wpmb-common-pages.php","Settings","Settings",8,"wpmbsettings","wpmb_settings_page");
 }
 
 ?>
