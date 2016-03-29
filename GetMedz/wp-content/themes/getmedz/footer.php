@@ -6,7 +6,7 @@
 				<div class="col-md-12 sub_footer">
 					<div class="col-md-5">
 						<?php echo wpmb_footermenu()?>
-						<p>Powered by Prochnost’ Technologies Pvt Ltd</p>
+						<p>Powered by MindScale Technologies Pvt Ltd.</p>
 					</div>
 					<div class="col-md-5">
 						<?php dynamic_sidebar( 'sidebar-5' ); ?>						

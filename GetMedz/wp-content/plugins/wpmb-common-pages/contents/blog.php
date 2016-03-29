@@ -37,7 +37,7 @@
 					<h2><?php echo $postdata->post_title?></h2>
 					<h3>
 						<i><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/time_icon.png" class="" alt=""/></i> <?php echo get_the_time('M n, Y', $postdata->ID); ?>
-						<span><i><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/chat_icon.png" class="" alt=""/></i> <?php echo $chtml; ?> </span>
+						<!--span><i><img src="<?php //echo get_stylesheet_directory_uri(); ?>/img/chat_icon.png" class="" alt=""/></i> <?php //echo $chtml; ?> </span-->
 					</h3>
 					<p><?php echo $postdata->post_content?></p>
 					<input value="More Details" id="btnsubmit" class="about_moredetail" type="button" onclick="location.href='<?php echo get_permalink( $postdata->ID ); ?>'">

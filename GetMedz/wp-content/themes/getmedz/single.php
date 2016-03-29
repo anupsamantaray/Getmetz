@@ -31,7 +31,7 @@ get_header('blog');
 					<ul class="list-inline">
 						<li><p><?php the_time('d M Y')?>, Posted by <span><?php the_author()?></span></p></li>
 						<li><p><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/time_icon.png"/> <?php the_time('M d, Y')?></p></li>
-						<li> <p><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/chat_icon.png"/> <?php echo $chtml?></p></li>
+						<!--li> <p><img src="<?php //echo get_stylesheet_directory_uri(); ?>/img/chat_icon.png"/> <?php //echo $chtml?></p></li-->
 					</ul>                           
 				</div> <!--End of top section-->
 				<div class="clr"></div>
