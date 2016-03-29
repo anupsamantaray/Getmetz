@@ -7,20 +7,26 @@ function wpmb_init () {
 	wpmb_register_post_type();
 	$ch = isset($_REQUEST['wpmb_choice']) ? $_REQUEST['wpmb_choice'] : '';
 	switch($ch) {
-		case "contact_us" :
+		case "contact_us" :			
 			$ctbl = $wpdb->prefix."contactus";
 			$data = $_REQUEST['data'];
 			$data['create_date'] = date('Y-m-d H:i:s');
 			$wpdb->insert($ctbl, $data, array('%s','%s','%s','%s','%s','%s'));
-			$message  = __('Hi admin,') . "\r\n\r\n";
-			$message  .= $data['message'] . "\r\n\r\n";
-			$admin_email = get_option( 'admin_email' );
-			$headers  = 'MIME-Version: 1.0' . "\r\n";
-			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-			$headers .= 'To: Admin <'.$admin_email.'>' . "\r\n";
+			$to = $admin_email = get_option( 'admin_email' );
+			
+			//Email send contents
+			$searchStr = array('%first_name%', '%last_name%', '%phone%', '%email%', '%message%');
+			$replaceStr = array($data['first_name'],$data['last_name'],$data['phone'],$data['email'],$data['message']);
+			$options = get_option('wpmb_save_options');
+			$formatSubject = ($options['subject']) ? $options['subject'] : "Contact Us : %first_name%";
+			$formatMessage = ($options['message']) ? $options['message'] : '<table><tr><td colspan="2"><h2>Message Details</h2></td></tr><tr><td>Name : </td><td>%first_name%' .  ' ' . '%last_name%</td></tr><tr><td>Phone: </td><td>%phone%</td></tr><tr><td>Email: </td><td>%email%</td></tr><tr><td>Message: </td><td>%message%</td></tr></table>';
+			
+			$headers = 'To: Admin <'.$admin_email.'>' . "\r\n";
 			$headers .= 'From: '.$data['first_name'].' <'.$data['email'].'>' . "\r\n";
-			$message = '<table><tr><td colspan="2"><h2>Message Details</h2></td></tr><tr><td>Name : </td><td>' . $data['first_name'] .  ' ' . $data['last_name'].'</td></tr><tr><td>Phone: </td><td>' .  $data['phone'] . '</td></tr><tr><td>Email: </td><td>' .  $data['email'] . '</td></tr><tr><td>Message: </td><td>'.$data['message'].'</td></tr></table>';
-			wp_mail($admin_email, 'Contact Us ...', $message, $headers);
+			$subject = str_replace($searchStr, $replaceStr, $formatSubject);
+			$message = str_replace($searchStr, $replaceStr, $formatMessage);
+			#echo "<hr>  : To :: $to <hr> Subject :: $subject <hr> Messgae :: $message <hr> Header :: $headers : <hr>";exit;
+			wp_mail($to, $subject, $message, $headers);
 			$_SESSION['sucmsg'] = "Mail sent successfully. Please wait administrator will contact you soon!";
 			header("Location:".wpmb_cur_url());exit;
 			break;
@@ -99,6 +105,10 @@ function wpmb_faqs() {
 	$str = ob_get_contents();
 	ob_clean();
 	return $str;
+}
+
+function wpmb_settings_page() {
+	include "contents/settings.php";
 }
 
 // Get the nav menu based on $menu_name (same as 'theme_location' or 'menu' arg to wp_nav_menu)
