@@ -9,65 +9,53 @@ get_header('inner');
 	<div class="commonmobile">
 		<img src="<?php bloginfo( 'template_url' );?>/img/mobile_pic.png" class="mobilpic" alt=""/>
 	</div>
-	<div class="blog_body featuresDiv">
-		<div class="common_bodydiv">
-			<div class="col-md-6 blogleft blogleftfeat">
-				<h2 class="getapp">Get App</h2>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-				<a href="javaScript:void(0);" class="appbutton"><img src="<?php bloginfo( 'template_url' );?>/img/appstore.png" class="" alt=""/></a>
-			</div>
-			<div class="col-md-6 workright1 blogleftfeat">
-				<div class="mobcontent">
+	<?php 
+	$posts_array = array();
+	$posts_array = get_posts(
+		array(
+			'posts_per_page' => -1,
+			'post_type' => 'howitworks',
+			'post_status' => 'publish'
+		)
+	);
+	?>
+	<?php foreach($posts_array as $ind => $postdata) : ?>
+		<div class="blog_body featuresDiv<?php echo $ind;?>">
+			<div class="common_bodydiv">
+				<div class="col-md-6 blogleft blogleftfeat">
+					<h2 class="getapp"><?php echo $postdata->post_title?></h2>
+					<?php echo $postdata->post_content?>
 				</div>
-			</div>
-			<div class="clr"></div>
-		</div>
-	</div>
-	<div class="blog_body featuresDiv2">
-		<div class="common_bodydiv">
-			<div class="col-md-6 blogleft blogleftfeat">
-				<h2 class="getapp2">Login</h2>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-				<div class="social_border">
-					<h4 class="joinUser">Or Joining Using</h4>
-					<div class="media_Icon">
-						<a href="javaScript:void(0);"><img src="img/fb.png" class="" alt=""/></a>
-						<a href="javaScript:void(0);"><img src="img/google.png" class="" alt=""/></a>
-						<a href="javaScript:void(0);"><img src="img/mail.png" class="" alt=""/></a>
+				<div class="col-md-6 workright<?php echo $ind+1;?> blogleftfeat">
+					<div class="mobcontent">
 					</div>
 				</div>
+				<div class="clr"></div>
 			</div>
-			<div class="col-md-6 workright2 blogleftfeat">
-				<div class="mobcontent">
-				</div>
-			</div>
-			<div class="clr"></div>
 		</div>
-	</div>
-	<div class="blog_body featuresDiv3">
-		<div class="common_bodydiv">
-			<div class="col-md-6 blogleft blogleftfeat">
-				<h2 class="getapp">Features</h2>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-				<div class="features_icon">
-					<div class="col-sm-6 commonfeatures">
-						<p><i><img src="img/features2.png" class="icon_Img" alt=""/></i>Capture Prescription/ Medication</p>
-						<p><i><img src="img/features1.png" class="icon_Img" alt=""/></i>Nearby</p>
-						<p><i><img src="img/features3.png" class="icon_Img" alt=""/></i>My Orders</p>
-					</div>
-					<div class="col-sm-6">
-						<p><i><img src="img/features4.png" class="icon_Img" alt=""/></i>Saved Prescription</p>
-						<p><i><img src="img/features5.png" class="icon_Img" alt=""/></i>24 hrs. Prescription</p>
-					</div>
-					<div class="clr"></div>
-				</div>
-			</div>
-			<div class="col-md-6 workright1 blogleftfeat">
-				<div class="mobcontent">
-				</div>
-			</div>
-			<div class="clr"></div>
-		</div>
-	</div>
+	<?php endforeach;?>
 </div>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/bootstrap/js/jquery.mousewheel.js"></script>
+<script>	
+	jQuery(document).ready(function(){
+		var h_slides = jQuery('.newAllfeatures').find('.blog_body').length;
+		var slideContent = ["", "featuresDiv2", "featuresDiv1", "featuresDiv0" ];
+		var h_current_slide = 0;
+		var h_prev_slide = 0;		
+		jQuery('.newAllfeatures').bind('mousewheel', function(e){
+			jQuery('.newAllfeatures .blog_body').fadeOut('slow');
+			if(e.originalEvent.wheelDelta / 120 > 0) {
+				h_prev_slide = h_current_slide;
+				h_current_slide = (h_current_slide === 0) ? h_slides-1 : h_current_slide-1;
+				jQuery('.featuresDiv'+ h_prev_slide).fadeOut('slow');
+				jQuery('.featuresDiv'+ h_current_slide).fadeIn('slow');
+			} else {
+				h_prev_slide = h_current_slide;
+				h_current_slide = (h_current_slide === h_slides-1) ? 0 : h_current_slide+1;
+				jQuery('.featuresDiv'+ h_prev_slide).fadeOut('slow');
+				jQuery('.featuresDiv'+ h_current_slide).fadeIn('slow');
+			}
+		});
+	});
+</script>
 <?php get_footer();?>

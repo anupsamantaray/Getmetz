@@ -940,3 +940,8 @@ ul{
 .social li a:hover{ 
 	opacity: .5;
 	}
+	
+	
+.sub_notification {
+	width : 90% !important;
+}

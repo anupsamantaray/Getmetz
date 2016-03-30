@@ -21,8 +21,9 @@ function wpmb_init () {
 			$formatSubject = ($options['subject']) ? $options['subject'] : "Contact Us : %first_name%";
 			$formatMessage = ($options['message']) ? $options['message'] : '<table><tr><td colspan="2"><h2>Message Details</h2></td></tr><tr><td>Name : </td><td>%first_name%' .  ' ' . '%last_name%</td></tr><tr><td>Phone: </td><td>%phone%</td></tr><tr><td>Email: </td><td>%email%</td></tr><tr><td>Message: </td><td>%message%</td></tr></table>';
 			
-			$headers = 'To: Admin <'.$admin_email.'>' . "\r\n";
-			$headers .= 'From: '.$data['first_name'].' <'.$data['email'].'>' . "\r\n";
+			$headers[] = 'Content-Type: text/html; charset=UTF-8';
+			$headers[] = 'From: '.$data['first_name'].' <'.$data['email'].'>';
+			$headers[] = 'To: Admin <'.$admin_email.'>';
 			$subject = str_replace($searchStr, $replaceStr, $formatSubject);
 			$message = str_replace($searchStr, $replaceStr, $formatMessage);
 			#echo "<hr>  : To :: $to <hr> Subject :: $subject <hr> Messgae :: $message <hr> Header :: $headers : <hr>";exit;
@@ -266,6 +267,22 @@ function wpmb_register_post_type() {
 			'labels' => array(
 				'name' => __( 'Customer Feedback' ),
 				'singular_name' => __( 'custfeedback' )
+			),
+		'public' => true,
+		'has_archive' => true,
+		'supports' => array( 'title', 'editor', 'author', 'excerpt', 'custom-fields', 'thumbnail' ),
+		'rewrite' => true
+		)
+	);
+
+	/*
+	* @How It Works post type
+	*/
+	register_post_type( 'howitworks',
+		array(
+			'labels' => array(
+				'name' => __( 'How It Works' ),
+				'singular_name' => __( 'howitworks' )
 			),
 		'public' => true,
 		'has_archive' => true,
