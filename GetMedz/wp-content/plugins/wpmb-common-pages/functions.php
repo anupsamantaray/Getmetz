@@ -147,15 +147,8 @@ function wpmb_footermenu() {
 }
 
 function wpmb_homeslider () {
-	$posts_array = array();
-	$posts_array = get_posts(
-		array(
-			'posts_per_page' => -1,
-			'post_type' => 'homeslider',
-			'post_status' => 'publish'
-		)
-	);
 	$str = '';
+	$posts_array = wpmb_get_homeslider();
 	if(!empty($posts_array)) {
 		foreach($posts_array as $ind => $postdata) {
 			if($ind < 3) {
@@ -170,6 +163,41 @@ function wpmb_homeslider () {
 	}
 	return $str;
 }
+
+function wpmb_homeslider_tagtext() {
+	$posts_array = wpmb_get_homeslider();
+	$str = '';
+	$show_str = '';
+	if(!empty($posts_array)) {
+		foreach($posts_array as $ind => $postdata) {
+			if($ind == 0) {
+				$show_str = '<div class="tagline_text">
+						<h1>'.$postdata->post_content.'</h1>
+					</div>
+					<a href="'.get_permalink( get_post_meta($postdata->ID, 'blog_details_id', true) ).'" class="moredetail">More Details</a>';
+			}
+			if($ind < 3) {
+				if (has_post_thumbnail( $postdata->ID ) ) {
+					$str .= '<div data-tagtext="'.$postdata->post_content.'" data-link="'.get_permalink( get_post_meta($postdata->ID, 'blog_details_id', true) ).'" style="display:none;" class="tagText_'.$ind.'"></div>';
+				}
+			}
+		}
+	}
+	return $str.$show_str;
+}
+
+function wpmb_get_homeslider() {
+	$posts_array = array();
+	$posts_array = get_posts(
+		array(
+			'posts_per_page' => -1,
+			'post_type' => 'homeslider',
+			'post_status' => 'publish'
+		)
+	);
+	return $posts_array;
+}
+
 function wpmb_create_table() {
 	global $wpdb;
 	$wpdb->query("CREATE TABLE IF NOT EXISTS `".$wpdb->prefix."contactus` (
@@ -293,6 +321,48 @@ function wpmb_register_post_type() {
 
 }
 
+/* Adds a meta box to the post edit screen */
+add_action( 'add_meta_boxes_homeslider', 'wpmb_add_homeslider_box' );
+function wpmb_add_homeslider_box() {
+    $screens = array( 'post', 'homeslider' );
+    foreach ( $screens as $screen ) {
+        add_meta_box(
+            'homeslider_meta_id',            // Unique ID
+            'Set Blog Details Page',      // Box title
+            'wpmb_homeslider_blog_box',  // Content callback
+             $screen                      // post type
+        );
+    }
+}
+
+function wpmb_homeslider_blog_box($post) {
+	$posts_array = array();
+	$posts_array = get_posts(
+		array(
+			'posts_per_page' => -1,
+			'post_type' => 'post',
+			'post_status' => 'publish'
+		)
+	);
+	$value = get_post_meta( $post->ID, 'blog_details_id', true );
+	?>
+	<label for="blog_details_id">Select Blog Details Page </label>
+	<select name="blog_details_id" id="blog_details_id" class="postbox">
+		<option value="">Select...</option>
+		<?php foreach($posts_array as $ind => $postdata) : ?>
+			<option value="<?php echo $postdata->ID?>" <?php if ( $postdata->ID == $value ) echo 'selected'; ?>><?php echo $postdata->post_title?></option>
+		<?php endforeach; wp_reset_query();?>
+	</select>
+	<?php
+}
+
+add_action( 'save_post', 'wpmb_save_homesliderdata' );
+function wpmb_save_homesliderdata( $post_id ) {
+    if ( array_key_exists('blog_details_id', $_POST ) ) {
+        update_post_meta($post_id, 'blog_details_id', $_POST['blog_details_id']);
+    }
+}
+
 function wpmb_includejs() {
 	?>
 	<script>
@@ -366,7 +436,8 @@ function wpmb_includejs() {
 					
 				}
 			);
-			
+			jQuery(".tagline_div .tagline_text h1").html(jQuery('.tagText_'+index1).data("tagtext"));
+			jQuery(".tagline_div a.moredetail").attr('href', jQuery('.tagText_'+index1).data("link"));
 		}
 		
 		function rightClickHandler(){
@@ -407,6 +478,8 @@ function wpmb_includejs() {
 			var i =$('.slidpic').attr('val');		
 			$($( ".circle" ).eq(index)).addClass("active");
 			$($( ".circle" ).eq(index-1)).removeClass("active");
+			jQuery(".tagline_div .tagline_text h1").html(jQuery('.tagText_'+index).data("tagtext"));
+			jQuery(".tagline_div a.moredetail").attr('href', jQuery('.tagText_'+index).data("link"));
 		}
 		
 		
