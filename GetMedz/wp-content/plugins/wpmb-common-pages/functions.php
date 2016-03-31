@@ -28,6 +28,13 @@ function wpmb_init () {
 			$message = str_replace($searchStr, $replaceStr, $formatMessage);
 			#echo "<hr>  : To :: $to <hr> Subject :: $subject <hr> Messgae :: $message <hr> Header :: $headers : <hr>";exit;
 			wp_mail($to, $subject, $message, $headers);
+			
+			//Mail to user
+			$headers1[] = 'Content-Type: text/html; charset=UTF-8';
+			$headers1[] = 'From: Admin <'.$admin_email.'>';
+			$headers1[] = 'To: '.$data['first_name'].' <'.$data['email'].'>';
+			$msg = "Hi ".$data['first_name']. " " .$data['last_name']."," . "\n\r" . "Email Sent Successfully!" . "\n\r" . "Admin will contact you soon! " . "\n\r" . "\n\r" . "Thanks, " . "\n\r" . "Admin" . "\n\r";
+			wp_mail($data['email'], "Email Sent Successfully!", $msg, $headers1);
 			$_SESSION['sucmsg'] = "Mail sent successfully. Please wait administrator will contact you soon!";
 			header("Location:".wpmb_cur_url());exit;
 			break;
