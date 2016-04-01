@@ -40,10 +40,7 @@
 							<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo.png" class="" alt=""/>
 						</a>
 					</div>
-					<div class="tagline_text">
-						<h1>Get best price quotation from the Pharmacist near you</h1>
-					</div>
-					<a href="javaScript:void(0);" class="moredetail">More Details</a>
+					<?php echo wpmb_homeslider_tagtext();?>					
 					<div class="countslide">
 						<ul>
 							<li><a href="javaScript:void(0);" class="circle active" index="0"></a></li>

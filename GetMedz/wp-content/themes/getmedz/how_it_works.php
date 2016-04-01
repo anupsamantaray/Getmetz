@@ -33,7 +33,7 @@ get_header('inner');
 				<div class="clr"></div>
 			</div>
 		</div>
-	<?php endforeach;?>
+	<?php endforeach; wp_reset_query();?>
 </div>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/bootstrap/js/jquery.mousewheel.js"></script>
 <script>	
