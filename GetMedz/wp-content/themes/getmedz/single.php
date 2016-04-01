@@ -60,6 +60,8 @@ get_header('blog');
 			</div>			
 		<?php endwhile; ?>
 		<?php get_sidebar( 'blog' ); ?>
+		
+		
 	</div>
 </section> 
 <?php get_footer(); ?>
