@@ -19,43 +19,58 @@ get_header('inner');
 		)
 	);
 	?>
-	<?php foreach($posts_array as $ind => $postdata) : ?>
-		<div class="blog_body featuresDiv<?php echo $ind;?>">
-			<div class="common_bodydiv">
-				<div class="col-md-6 blogleft blogleftfeat">
-					<h2 class="getapp"><?php echo $postdata->post_title?></h2>
-					<?php echo $postdata->post_content?>
-				</div>
-				<div class="col-md-6 workright<?php echo $ind+1;?> blogleftfeat">
-					<div class="mobcontent">
+	<ul id="news">
+		<?php foreach($posts_array as $ind => $postdata) : 
+			if (has_post_thumbnail( $postdata->ID ) ):
+				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $postdata->ID ), array(190, 330) );
+			endif;
+			?>
+			<li>
+				<div class="blog_body featuresDiv<?php echo $ind;?>">
+					<div class="common_bodydiv">
+						<div class="col-md-6 blogleft blogleftfeat">
+							<h2 class="getapp"><?php echo $postdata->post_title?></h2>
+							<?php echo $postdata->post_content?>
+						</div>
+						<div class="col-md-6 workright1 blogleftfeat">
+							<div class="mobcontent">
+								<img src="<?php echo $image[0];?>" width="190" height="330">
+							</div>
+						</div>
+						<div class="clr"></div>
 					</div>
 				</div>
-				<div class="clr"></div>
-			</div>
-		</div>
-	<?php endforeach; wp_reset_query();?>
+			</li>
+		<?php endforeach; wp_reset_query();?>
+	</ul>
 </div>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/bootstrap/js/jquery.mousewheel.js"></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/bootstrap/js/slider.js"></script>
 <script>	
 	jQuery(document).ready(function(){
-		var h_slides = jQuery('.newAllfeatures').find('.blog_body').length;
-		var slideContent = ["", "featuresDiv2", "featuresDiv1", "featuresDiv0" ];
-		var h_current_slide = 0;
-		var h_prev_slide = 0;		
-		jQuery('.newAllfeatures').bind('mousewheel', function(e){
-			jQuery('.newAllfeatures .blog_body').fadeOut('slow');
-			if(e.originalEvent.wheelDelta / 120 > 0) {
-				h_prev_slide = h_current_slide;
-				h_current_slide = (h_current_slide === 0) ? h_slides-1 : h_current_slide-1;
-				jQuery('.featuresDiv'+ h_prev_slide).fadeOut('slow');
-				jQuery('.featuresDiv'+ h_current_slide).fadeIn('slow');
-			} else {
-				h_prev_slide = h_current_slide;
-				h_current_slide = (h_current_slide === h_slides-1) ? 0 : h_current_slide+1;
-				jQuery('.featuresDiv'+ h_prev_slide).fadeOut('slow');
-				jQuery('.featuresDiv'+ h_current_slide).fadeIn('slow');
+		$('#news').mbvslider();
+		var mouseWheelEvent = (navigator.userAgent.indexOf("Firefox") != -1) ? "DOMMouseScroll" : "mousewheel";
+		$('.newAllfeatures').on(mouseWheelEvent, mouseScrollHowitwork);
+		function mouseScrollHowitwork(e) {
+			e.preventDefault();
+			$('.newAllfeatures').off(mouseWheelEvent);
+			setTimeout(function(){
+				$('.newAllfeatures').on(mouseWheelEvent, mouseScrollHowitwork);
+			}, 500);
+			var direction = (function () {
+				var delta = (e.type === 'DOMMouseScroll' ? e.originalEvent.detail * -40 : e.originalEvent.wheelDelta);
+				return delta > 0 ? 0 : 1;
+			}());
+			if(direction === 1) {
+				jQuery('.btn-next').trigger("click");
+				//console.log('down');
 			}
-		});
+			if(direction === 0) {
+				jQuery('.btn-pre').trigger("click");
+				//console.log('up');
+			}
+			
+		}
 	});
 </script>
 <?php get_footer();?>

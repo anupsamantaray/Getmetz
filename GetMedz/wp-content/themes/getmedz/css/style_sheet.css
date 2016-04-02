@@ -692,7 +692,7 @@ ul{
 	.commonfeatures{
 		padding:0 15px 0 0!important;
 	}
-	.featuresDiv{
+	/*.featuresDiv{
 		position:absolute;
 		width:100%;
 		top: 20.7%;
@@ -712,7 +712,7 @@ ul{
 		top: 20.7%;
 		left:0;
 		z-index:1;
-	}
+	}*/
 	.newAllfeatures{
 		height:432px;
 		overflow:hidden;
@@ -944,4 +944,20 @@ ul{
 	
 .sub_notification {
 	width : 90% !important;
+}
+
+/*Vertical slider CSS*/
+.mbvslider{
+	padding: 0;
+	margin: 0;
+	height:432px;
+	overflow: hidden;
+}
+
+.mbvslider li{
+	list-style: none;
+	border-bottom:#ddd solid 1px;	
+	display: inline-block;
+	position: relative;
+	width: 100%;
 }
