@@ -51,6 +51,14 @@ get_header('inner');
 		$('#news').mbvslider();
 		var mouseWheelEvent = (navigator.userAgent.indexOf("Firefox") != -1) ? "DOMMouseScroll" : "mousewheel";
 		$('.newAllfeatures').on(mouseWheelEvent, mouseScrollHowitwork);
+		$(document).keypress(function(e) {
+			var code = (e.keyCode ? e.keyCode : e.which);
+			if (code == 40) {
+				jQuery('.btn-next').trigger("click");
+			} else if (code == 38) {
+				jQuery('.btn-pre').trigger("click");
+			}
+		});
 		function mouseScrollHowitwork(e) {
 			e.preventDefault();
 			$('.newAllfeatures').off(mouseWheelEvent);
